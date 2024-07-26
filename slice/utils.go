@@ -18,3 +18,11 @@ func SlicesSum[T common.Number](nums []T) (sum T) {
 	}
 	return
 }
+
+func PrefixSum(nums []int) []int {
+	prefix := make([]int, len(nums)+1)
+	for i := 0; i < len(nums); i++ {
+		prefix[i+1] = prefix[i] + nums[i]
+	}
+	return prefix
+}

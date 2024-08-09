@@ -30,3 +30,13 @@ func TestPrintAllPathsToLeaves(t *testing.T) {
 		PrintAllPathsToLeaves(root)
 	})
 }
+
+func TestLevelOrder(t *testing.T) {
+	randomOrders := make([]int, 15)
+	for j := 0; j < len(randomOrders); j++ {
+		randomOrders[j] = rand.IntN(11) - 1
+	}
+	root := GenerateTreeFromLevelOrder(randomOrders)
+	fmt.Println(LevelOrder(root))
+	PrintAllPathsToLeaves(root)
+}

@@ -14,6 +14,9 @@ type TreeNode struct {
 
 // GenerateTreeFromLevelOrder 从层序遍历构造二叉树
 func GenerateTreeFromLevelOrder(orders []int) *TreeNode {
+	if len(orders) == 0 {
+		return nil
+	}
 	treeNodes := make([]*TreeNode, len(orders))
 	for i := 0; i < len(orders); i++ {
 		if orders[i] != -1 {
@@ -48,4 +51,29 @@ func PrintAllPathsToLeaves(root *TreeNode) {
 	}
 	dfs(root, []string{})
 	fmt.Println(ans)
+}
+
+func LevelOrder(root *TreeNode) (ans [][]int) {
+	if root == nil {
+		return
+	}
+	queue := make([]*TreeNode, 0)
+	queue = append(queue, root)
+	for len(queue) > 0 {
+		size := len(queue)
+		level := make([]int, 0, size)
+		for i := 0; i < size; i++ {
+			temp := queue[0]
+			queue = queue[1:]
+			level = append(level, temp.Val)
+			if temp.Left != nil {
+				queue = append(queue, temp.Left)
+			}
+			if temp.Right != nil {
+				queue = append(queue, temp.Right)
+			}
+		}
+		ans = append(ans, level)
+	}
+	return
 }
